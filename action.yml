@@ -1,0 +1,15 @@
+name: "iOs increment version"
+description: "Increment ios version"
+inputs:
+  version:
+    description: "version string"
+    required: true
+  project-path:
+    description: "ios project path"
+    required: true
+runs:
+  using: "node16"
+  main: "dist/index.js"
+branding:
+  icon: "arrow-up"
+  color: "black"
