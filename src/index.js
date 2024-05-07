@@ -13,7 +13,7 @@ async function run() {
 
         if (!fs.existsSync(path.resolve(projectPath))) {
             core.setFailed('Project path does not exist')
-            return;
+            return
         }
 
         const projectFullPath = path.resolve(projectPath)
@@ -24,12 +24,12 @@ async function run() {
 
         core.info(`New Marketing Version..., ${incrementMarketingVersionResult}`)
 
-        const versionSplit = version.split(".");
+        const versionSplit = version.split(".")
         const majorVersion = Number(versionSplit[0])
         const minorVersion = Number(versionSplit[1])
         const patchVersion = Number(versionSplit[2])
 
-        const buildVersion = majorVersion * 1000000 + minorVersion * 1000 + patchVersion;
+        const buildVersion = majorVersion * 1000000 + minorVersion * 1000 + patchVersion
 
         await exec.exec(`agvtool new-version -all ${buildVersion}`, [], { cwd: projectFullPath })
 
@@ -41,4 +41,4 @@ async function run() {
     }
 }
 
-run();
+run()
