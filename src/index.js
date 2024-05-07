@@ -8,8 +8,8 @@ async function run() {
         const version = core.getInput('version', { required: true })
         const projectPath = core.getInput('project-path', { required: true })
 
-        core.setOutput('Setting to version...', version)
-        core.setOutput('Project path...', projectPath)
+        core.info(`Setting to version... ${version}`)
+        core.info(`Project path... ${projectPath}`)
 
         if (!fs.existsSync(path.resolve(projectPath))) {
             core.setFailed('Project path does not exist')
@@ -22,7 +22,7 @@ async function run() {
 
         const incrementMarketingVersionResult = await exec.exec('agvtool what-marketing-version', [], { cwd: projectFullPath })
 
-        core.setOutput('New Marketing Version...', incrementMarketingVersionResult)
+        core.info(`New Marketing Version..., ${incrementMarketingVersionResult}`)
 
         const versionSplit = version.split(".");
         const majorVersion = Number(versionSplit[0])
@@ -35,7 +35,7 @@ async function run() {
 
         const incrementBuildVersionResult = await exec.exec('agvtool what-version', [], { cwd: projectFullPath })
 
-        core.setOutput('New Build Version...', incrementBuildVersionResult)
+        core.info(`New Build Version... ${incrementBuildVersionResult}`)
     } catch (error) {
         core.setFailed(error.message)
     }
